@@ -1,17 +1,12 @@
-const mongoose = require('mongoose');
+
 const express = require('express');
 const app = express();
+const dotenv = require('dotenv');
+require('./db/conn');
 
-const DB = 'mongodb+srv://rishikeshpawar:rutu6march@cluster0.uplqyax.mongodb.net/MERNTHAPA?retryWrites=true&w=majority'
+dotenv.config({path:'./config.env'});
 
-mongoose.connect(DB, {
-    // useNewUrlParser: true,       // whats use of these 3 arguments ?
-    // useCreateIndex: true,
-    // useUnifiedTopology: true,
-    // useFindAndModify: false
-}).then(()=>{
-    console.log('db connected')
-}).catch((err)=>console.log('db not found'));
+const PORT = process.env.PORT;
 
 app.get('/',(req, res)=>{
     res.send('Hello world root');
@@ -26,8 +21,8 @@ app.get('/about', middleware, (req, res)=>{
     res.send('Hello world about');
 });
 
-app.listen(4000, ()=>{
-    console.log('at 4000 running')
+app.listen(PORT, ()=>{
+    console.log(`at ${PORT} running`)
 });
 
 console.log(123);
