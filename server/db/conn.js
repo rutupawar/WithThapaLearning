@@ -11,4 +11,4 @@ mongoose.connect(DB, {
     // useFindAndModify: false
 }).then(()=>{
     console.log('db connected')
-}).catch((err)=>console.log('db not found ' + DB));
+}).catch((err)=>console.log('db not found ' + DB + ' '+ err));
