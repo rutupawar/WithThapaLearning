@@ -2,3 +2,4 @@
 2. npm init -y
 3. node app.js      // To run a js file
 4. nodemon app.js   // To run js file, and will rerun for any code change
+5. Myside: replaced all 'const' with 'let', const required ?

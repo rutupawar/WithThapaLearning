@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+let mongoose = require('mongoose');
+let dotenv = require('dotenv');
 dotenv.config({path:'./config.env'});
 
-const DB = process.env.DATABASE;
+let DB = process.env.DATABASE;
 
 mongoose.connect(DB, {
     // useNewUrlParser: true,       // whats use of these 3 arguments ?

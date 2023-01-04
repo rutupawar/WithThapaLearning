@@ -1,28 +1,25 @@
 
-const express = require('express');
-const app = express();
-const dotenv = require('dotenv');
+let express = require('express');
+let app = express();
+
 require('./db/conn');
 
-dotenv.config({path:'./config.env'});
-
-const PORT = process.env.PORT;
+let PORT = process.env.PORT;
+app.listen(PORT, ()=>{
+    console.log(`at ${PORT} running`)
+});
 
 app.get('/',(req, res)=>{
     res.send('Hello world root');
 });
 
-const middleware = (req, res, next) => {
+let middleware = (req, res, next) => {
     console.log('At middleware');
     next();
 }
 
-app.get('/about', middleware, (req, res)=>{
+app.get('/about', middleware, (req, res)=>{     // This middleware function will be called, as request arrived -> middleware -> serving request
     res.send('Hello world about');
 });
 
-app.listen(PORT, ()=>{
-    console.log(`at ${PORT} running`)
-});
-
-console.log(123);
+console.log(123); // Despite being at last, this is logged at very first, why ?
