@@ -9,9 +9,11 @@ app.listen(PORT, ()=>{
     console.log(`at ${PORT} running`)
 });
 
-app.get('/',(req, res)=>{
-    res.send('Hello world root');
-});
+// Making use of router
+
+// Json type specification through code and postman is required like below
+app.use(express.json());
+app.use(require('./router/auth'));
 
 let middleware = (req, res, next) => {
     console.log('At middleware');
