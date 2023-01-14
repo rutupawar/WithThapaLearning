@@ -42,15 +42,24 @@ router.post('/signin', async (req, res) => {
 
     try{
         const userLogin = await User.findOne({ email: email});
-        if(userLogin && await bcrypt.compare(userLogin.password, password)){
-            res.json({success: "Login done"});
+        if(userLogin){
+            const isMatch = await bcrypt.compare(password, userLogin.password);
+            console.log(isMatch);
+            if(isMatch){
+                const token = await userLogin.generateAuthToken();
+                console.log(token);
+                res.json({success: "Login done"});
+            }
+            else{
+                res.json({fail: "Login failed, invalid credentials"});
+            }
         }
         else{
             res.json({fail: "Login failed, invalid credentials"});
         }
         // res.json({"succes1s": "Login done"});        // res.json sends responce directly
     }
-    catch{
+    catch (err){
         console.log(err);
     }
 })
